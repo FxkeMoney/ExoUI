@@ -4,7 +4,6 @@ local library = {
     version = "Exo V3",
     active = true
 }
-print("Loading Exo V3 UI")
 local TS = game:GetService("TweenService")
 local UIS = game:GetService("UserInputService")
 
@@ -523,7 +522,10 @@ function library:Tab(Title, Description)
     return tabList
 end
 
-local Spritesheets, IconLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/Eclipse-SS/WindUI/refs/heads/main/src/icons/lucide.lua"))()
+local Lucide = loadstring(game:HttpGet("https://raw.githubusercontent.com/Eclipse-SS/WindUI/refs/heads/main/src/icons/lucide.lua"))()
+
+local Spritesheets = Lucide.Spritesheets
+local IconLibrary = Lucide.Icons
 
 local function isIcon(value)
 	return type(value) == "table" and getmetatable(value) and getmetatable(value).__type == "Icon"
