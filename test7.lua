@@ -615,27 +615,28 @@ function library:Button(TabList, Icon, Text, Callback)
     icon.ImageTransparency = 0.20000000298023224
     icon.Selectable = false
     icon.AnchorPoint = Vector2.new(0, 0)
+    local IconImage = "did not set"
     for i,v in pairs(Icon) do
         print(i,v)
     end
     if Icon.Type == "NamedIcon" then
 		print("Using named icon:", Icon.Name)
         local iconDef = Icon.Definition
-        Icon = Spritesheets[iconDef.Image]
+        for i,v in pairs(iconDef) do
+            print(i,v)
+        end
+        IconImage = Spritesheets[iconDef.Image]
         icon.ImageRectSize = iconDef.ImageRectSize
         icon.ImageRectOffset = iconDef.ImageRectPosition
 	else
 		print("Using asset id:", Icon.Id)
-        Icon = "rbxassetid://"..Icon.Id
+        IconImage = "rbxassetid://"..Icon.Id
 	end
-    print(Icon)
-    for i,v in pairs(Icon) do
-       print(i,v) 
-    end
-    icon.Image = Icon
+    print(IconImage)
+    icon.Image = IconImage
     icon.TileSize = UDim2.new(1, 0, 1, 0)
     icon.BorderColor = BrickColor.new("Really black")
-    icon.ImageContent = Content.fromUri(Icon)
+    icon.ImageContent = Content.fromUri(IconImage)
     icon.AutomaticSize = Enum.AutomaticSize.None
     icon.Size = UDim2.new(0, 30, 0, 30)
     icon.ClipsDescendants = false
