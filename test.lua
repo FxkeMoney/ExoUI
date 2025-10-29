@@ -4,6 +4,7 @@ local library = {
     version = "Exo V3",
     active = true
 }
+print("Loading Exo V3 UI")
 local TS = game:GetService("TweenService")
 local UIS = game:GetService("UserInputService")
 
