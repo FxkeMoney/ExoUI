@@ -615,7 +615,9 @@ function library:Button(TabList, Icon, Text, Callback)
     icon.ImageTransparency = 0.20000000298023224
     icon.Selectable = false
     icon.AnchorPoint = Vector2.new(0, 0)
-    print(Icon)
+    for i,v in pairs(Icon) do
+        print(i,v)
+    end
     if Icon.Type == "NamedIcon" then
 		print("Using named icon:", Icon.Name)
         local iconDef = Icon.Definition
@@ -626,6 +628,10 @@ function library:Button(TabList, Icon, Text, Callback)
 		print("Using asset id:", Icon.Id)
         Icon = "rbxassetid://"..Icon.Id
 	end
+    print(Icon)
+    for i,v in pairs(Icon) do
+       print(i,v) 
+    end
     icon.Image = Icon
     icon.TileSize = UDim2.new(1, 0, 1, 0)
     icon.BorderColor = BrickColor.new("Really black")
