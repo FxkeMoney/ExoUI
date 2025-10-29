@@ -615,6 +615,7 @@ function library:Button(TabList, Icon, Text, Callback)
     icon.ImageTransparency = 0.20000000298023224
     icon.Selectable = false
     icon.AnchorPoint = Vector2.new(0, 0)
+    print(Icon)
     if Icon.Type == "NamedIcon" then
 		print("Using named icon:", Icon.Name)
         local iconDef = Icon.Definition
