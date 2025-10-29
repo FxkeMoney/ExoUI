@@ -625,6 +625,10 @@ function library:Button(TabList, Icon, Text, Callback)
         for i,v in pairs(iconDef) do
             print(i,v)
         end
+        print(Spritesheets)
+        for i,v in pairs(Spritesheets) do
+            print(i, v)
+        end
         IconImage = Spritesheets[iconDef.Image]
         icon.ImageRectSize = iconDef.ImageRectSize
         icon.ImageRectOffset = iconDef.ImageRectPosition
