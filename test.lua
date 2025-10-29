@@ -522,7 +522,32 @@ function library:Tab(Title, Description)
     return tabList
 end
 
+local Spritesheets = {
+	["1"] = "rbxassetid://134722274467096",
+	["10"] = "rbxassetid://136452605242985",
+	["11"] = "rbxassetid://120778262566485",
+	["12"] = "rbxassetid://93103790340242",
+	["13"] = "rbxassetid://85012968653140",
+	["14"] = "rbxassetid://134053738661660",
+	["15"] = "rbxassetid://115487436232027",
+	["16"] = "rbxassetid://75221016860290",
+	["17"] = "rbxassetid://105957381820378",
+	["2"] = "rbxassetid://120084598225286",
+	["3"] = "rbxassetid://92209291062527",
+	["4"] = "rbxassetid://98740753192722",
+	["5"] = "rbxassetid://119336196965129",
+	["6"] = "rbxassetid://104955103991281",
+	["7"] = "rbxassetid://127364412882967",
+	["8"] = "rbxassetid://77048702691728",
+	["9"] = "rbxassetid://99288903014187",
+}
+
+local function isIcon(value)
+	return type(value) == "table" and getmetatable(value) and getmetatable(value).__type == "Icon"
+end
+
 function library:Button(TabList, Icon, Text, Callback)
+    if not isIcon(Icon) then return end
     local tabButton = Instance.new("ImageButton")
     tabButton.Parent = TabList
     tabButton.LayoutOrder = 0
@@ -605,10 +630,20 @@ function library:Button(TabList, Icon, Text, Callback)
     icon.ImageTransparency = 0.20000000298023224
     icon.Selectable = false
     icon.AnchorPoint = Vector2.new(0, 0)
-    icon.Image = "rbxassetid://"..Icon
+    if Icon.Type == "NamedIcon" then
+		print("Using named icon:", Icon.Name)
+        local iconDef = Icon.Definition
+        Icon = Spritesheets[iconDef.Image]
+        icon.ImageRectSize = iconDef.ImageRectSize
+        icon.ImageRectOffset = iconDef.ImageRectPosition
+	else
+		print("Using asset id:", Icon.Id)
+        Icon = "rbxassetid://"..Icon.Id
+	end
+    icon.Image = Icon
     icon.TileSize = UDim2.new(1, 0, 1, 0)
     icon.BorderColor = BrickColor.new("Really black")
-    icon.ImageContent = Content.fromUri("rbxassetid://"..Icon)
+    icon.ImageContent = Content.fromUri(Icon)
     icon.AutomaticSize = Enum.AutomaticSize.None
     icon.Size = UDim2.new(0, 30, 0, 30)
     icon.ClipsDescendants = false
@@ -919,6 +954,7 @@ scale.Name = "scale"
 scale.Scale = 1
 
 function library:modal(Title, Description, Icon, RawIcon)
+    if not isIcon(Icon) then return end
     local modal_panel = Instance.new("ImageButton")
     modal_panel.Parent = ModalFolder
     modal_panel.LayoutOrder = 0
@@ -1185,14 +1221,20 @@ function library:modal(Title, Description, Icon, RawIcon)
     profile.ImageTransparency = 0
     profile.Selectable = false
     profile.AnchorPoint = Vector2.new(0, 0)
-    local nigger = "rbxassetid://"..Icon
-    if RawIcon ~= nil then
-        nigger = Icon
-    end
-    profile.Image = nigger
+    if Icon.Type == "NamedIcon" then
+		print("Using named icon:", Icon.Name)
+        local iconDef = Icon.Definition
+        Icon = Spritesheets[iconDef.Image]
+        icon.ImageRectSize = iconDef.ImageRectSize
+        icon.ImageRectOffset = iconDef.ImageRectPosition
+	else
+		print("Using asset id:", Icon.Id)
+        Icon = "rbxassetid://"..Icon.Id
+	end
+    profile.Image = Icon
     profile.TileSize = UDim2.new(1, 0, 1, 0)
     profile.BorderColor = BrickColor.new("Really black")
-    profile.ImageContent = Content.fromUri(nigger)
+    profile.ImageContent = Content.fromUri(Icon)
     profile.AutomaticSize = Enum.AutomaticSize.None
     profile.Size = UDim2.new(0, 100, 0, 100)
     profile.ClipsDescendants = false
@@ -1978,7 +2020,8 @@ function library:ModalLabel(modal, text)
     end)
 end
 
-function library:ModalButton(modal, text, ICcon, callback)
+function library:ModalButton(modal, text, Icon, callback)
+    if not isIcon(Icon) then return end
     local Button = Instance.new("ImageButton")
     Button.Parent = modal
     Button.LayoutOrder = 2
@@ -2089,10 +2132,20 @@ function library:ModalButton(modal, text, ICcon, callback)
     icon.ImageTransparency = 0.10000000149011612
     icon.Selectable = false
     icon.AnchorPoint = Vector2.new(1, 0.5)
-    icon.Image = "rbxassetid://"..ICcon
+        if Icon.Type == "NamedIcon" then
+		print("Using named icon:", Icon.Name)
+        local iconDef = Icon.Definition
+        Icon = Spritesheets[iconDef.Image]
+        icon.ImageRectSize = iconDef.ImageRectSize
+        icon.ImageRectOffset = iconDef.ImageRectPosition
+	else
+		print("Using asset id:", Icon.Id)
+        Icon = "rbxassetid://"..Icon.Id
+	end
+    icon.Image = Icon
     icon.TileSize = UDim2.new(1, 0, 1, 0)
     icon.BorderColor = BrickColor.new("Really black")
-    icon.ImageContent = Content.fromUri("rbxassetid://"..ICcon)
+    icon.ImageContent = Content.fromUri(Icon)
     icon.AutomaticSize = Enum.AutomaticSize.None
     icon.Size = UDim2.new(0, 18, 0, 18)
     icon.ClipsDescendants = false
