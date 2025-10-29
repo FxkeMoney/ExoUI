@@ -522,25 +522,7 @@ function library:Tab(Title, Description)
     return tabList
 end
 
-local Spritesheets = {
-	["1"] = "rbxassetid://134722274467096",
-	["10"] = "rbxassetid://136452605242985",
-	["11"] = "rbxassetid://120778262566485",
-	["12"] = "rbxassetid://93103790340242",
-	["13"] = "rbxassetid://85012968653140",
-	["14"] = "rbxassetid://134053738661660",
-	["15"] = "rbxassetid://115487436232027",
-	["16"] = "rbxassetid://75221016860290",
-	["17"] = "rbxassetid://105957381820378",
-	["2"] = "rbxassetid://120084598225286",
-	["3"] = "rbxassetid://92209291062527",
-	["4"] = "rbxassetid://98740753192722",
-	["5"] = "rbxassetid://119336196965129",
-	["6"] = "rbxassetid://104955103991281",
-	["7"] = "rbxassetid://127364412882967",
-	["8"] = "rbxassetid://77048702691728",
-	["9"] = "rbxassetid://99288903014187",
-}
+local Spritesheets, IconLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/Eclipse-SS/WindUI/refs/heads/main/src/icons/lucide.lua"))()
 
 local function isIcon(value)
 	return type(value) == "table" and getmetatable(value) and getmetatable(value).__type == "Icon"
@@ -2388,7 +2370,6 @@ end)
 library:RemoveBlur()
 library:AddBlur()
 
-local IconLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/Eclipse-SS/WindUI/refs/heads/main/src/icons/lucide.lua"))()
 local Icons = {}
 
 function Icons:Create(nameOrId)
